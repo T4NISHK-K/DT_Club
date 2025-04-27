@@ -607,12 +607,23 @@ export function HackathonLandingPage() {
                   {Array.from({ length: 20 }).map((_, idx) => (
                     <div key={idx} className="mb-4">
                       <img
-                        onClick={() => setSelectedImage(`/src/assets/coi/${idx + 1}.jpg`)}
+                        onClick={() => setSelectedImage(`/coi/gallery/${idx + 1}.jpg`)}
                         src={`/coi/gallery/${idx + 1}.jpg`} // Directly use idx + 1 for 1-20 from public folder ie public/coi/gallery
                         alt={`Gallery ${idx + 1}`}
                         width={400}
                         height={300}
                         className="w-full rounded-lg object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        style={{
+                          boxShadow: boxShadowStyles.default,
+                          transition: transitionStyle.boxShadow,
+                        }}
+                        onMouseEnter={(e) => applyBoxShadow(e, boxShadowStyles.hover)}
+                        onMouseLeave={(e) => applyBoxShadow(e, boxShadowStyles.default)}
+                        
+                        onError={(e) => {
+                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.src = `/coi/gallery/${idx + 1}.JPG`;
+                        }}
                       />
                     </div>
                   ))}
