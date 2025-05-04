@@ -29,6 +29,18 @@ export function HackathonLandingPage() {
   const galleryRef = useRef(null);
   const [showMasonry, setShowMasonry] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+const galleryImages = Array.from({ length: 20 }).map((_, i) => `/coi/gallery/${i + 1}.jpg`);
+
+
+const goNext = () => {
+  setSelectedIndex((prev) => (prev + 1) % galleryImages.length);
+};
+
+const goPrev = () => {
+  setSelectedIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+};
+
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -142,11 +154,11 @@ export function HackathonLandingPage() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src="/placeholder.svg"
+              src="/src/assets/l1_t.png"
               alt="Calculas of Innovation Logo"
               width={40}
               height={40}
-              className="rounded"
+              className="rounded" /*w-[40px] h-[40px] */
             />
             <span className="text-lg font-bold text-red-600">Calculus of Innovation</span>
           </div>
@@ -588,71 +600,109 @@ export function HackathonLandingPage() {
 
             {/* Button to toggle full gallery */}
             <div className="mt-8 text-center">
-              <button
-                onClick={() => setShowMasonry((prev) => !prev)}
-                className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none"
-              >
-                {showMasonry ? 'Hide Full Gallery' : 'View Full Gallery'}
-              </button>
-            </div>
+                <button
+                  onClick={() => setShowMasonry((prev) => !prev)}
+                  className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none"
+                >
+                  {showMasonry ? 'Hide Full Gallery' : 'View Full Gallery'}
+                </button>
+              </div>
 
             {/* Masonry Grid on click */}
             {showMasonry && (
-              <div className="mt-8">
-                <Masonry
-                  breakpointCols={breakpointColumnsObj}
-                  className="flex -ml-4 w-auto"
-                  columnClassName="pl-4 bg-clip-padding"
-                >
-                  {Array.from({ length: 20 }).map((_, idx) => (
-                    <div key={idx} className="mb-4">
+              <div
+                className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                style={{ gridAutoRows: "150px", gridAutoFlow: "dense" }}
+              >
+                {Array.from({ length: 20 }).map((_, idx) => {
+                  // Choose 5 random indexes to span two rows
+                  const bigIndexes = [2, 5, 9, 14, 18];
+                  const isBig = bigIndexes.includes(idx);
+
+                  return (
+                    <div
+                      key={idx}
+                      className={`${isBig ? "row-span-2" : "row-span-1"} overflow-hidden`}
+                    >
                       <img
-                        onClick={() => setSelectedImage(`/coi/gallery/${idx + 1}.jpg`)}
-                        src={`/coi/gallery/${idx + 1}.jpg`} // Directly use idx + 1 for 1-20 from public folder ie public/coi/gallery
+                        src={`/coi/gallery/${idx + 1}.jpg`}
                         alt={`Gallery ${idx + 1}`}
-                        width={400}
-                        height={300}
-                        className="w-full rounded-lg object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-                        style={{
-                          boxShadow: boxShadowStyles.default,
-                          transition: transitionStyle.boxShadow,
-                        }}
-                        onMouseEnter={(e) => applyBoxShadow(e, boxShadowStyles.hover)}
-                        onMouseLeave={(e) => applyBoxShadow(e, boxShadowStyles.default)}
-                        
+                        className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+                        onClick={() => setSelectedIndex(idx)}
                         onError={(e) => {
-                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.onerror = null;
                           e.target.src = `/coi/gallery/${idx + 1}.JPG`;
                         }}
                       />
                     </div>
-                  ))}
-                </Masonry>
+                  );
+                })}
               </div>
             )}
-            {selectedImage && (
-              <div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4"
-                onClick={() => setSelectedImage(null)}
-              >
-                <div
-                  className="relative max-w-3xl w-full"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={() => setSelectedImage(null)}
-                    className="absolute top-0 right-0 m-2 text-white text-3xl font-bold hover:text-red-500"
-                  >
-                    &times;
-                  </button>
-                  <img
-                    src={selectedImage}
-                    alt="Preview"
-                    className="rounded-lg w-full max-h-[90vh] object-contain mx-auto"
-                  />
-                </div>
-              </div>
-            )}
+           {selectedIndex !== null && (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4"
+    onClick={() => setSelectedIndex(null)}
+  >
+    <div
+      className="relative max-w-3xl w-full"
+      onClick={(e) => e.stopPropagation()}
+
+    >
+      {/* x button */}
+      <button
+        onClick={() => setSelectedIndex(null)}
+        className="absolute top-4 right-4 z-20
+        w-10 h-10 flex items-center justify-center
+        rounded-full
+        bg-white/30 backdrop-blur-sm
+        transition duration-200 ease-out
+        hover:bg-red-600
+        hover:text-white transition duration-200
+        group text-gray-700"
+      >
+        &times;
+      </button>
+
+      {/* Arrows */}
+      <button
+        onClick={goPrev}
+        className="absolute left-4 top-1/2 z-20 -translate-y-1/2
+        p-3 rounded-full
+        bg-white/30 backdrop-blur-sm
+        transition duration-200 ease-out
+        hover:bg-red-600
+        hover:text-white transition duration-200
+        text-gray-700"
+      >
+        &#8592;
+      </button>
+      <button
+        onClick={goNext}
+        className="absolute right-4 top-1/2 z-20 -translate-y-1/2
+        p-3 rounded-full
+        bg-white/30 backdrop-blur-sm
+        transition duration-200 ease-out
+        hover:bg-red-600
+        hover:text-white transition duration-200
+        text-gray-700"
+      >
+        &#8594;
+      </button>
+
+      <img
+        src={galleryImages[selectedIndex]}
+        alt="Preview"
+        className="rounded-lg w-full max-h-[90vh] object-contain mx-auto"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = galleryImages[selectedIndex].replace('.jpg', '.JPG');
+        }}
+      />
+    </div>
+  </div>
+)}
+
           </div>
         </section>
 
