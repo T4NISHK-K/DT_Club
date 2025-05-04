@@ -664,31 +664,30 @@ const goPrev = () => {
         &times;
       </button>
 
-      {/* Arrows */}
+      <div className="absolute bottom-1 left-1/2 z-20 flex -translate-x-1/2 gap-4">
       <button
         onClick={goPrev}
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2
-        p-3 rounded-full
-        bg-white/30 backdrop-blur-sm
-        transition duration-200 ease-out
-        hover:bg-red-600
-        hover:text-white transition duration-200
-        text-gray-700"
+        className="p-3 rounded-full
+          bg-white/30 backdrop-blur-sm
+          transition duration-200 ease-out
+          hover:bg-red-600
+          hover:text-white transition duration-200
+          text-gray-700"
       >
         &#8592;
       </button>
       <button
         onClick={goNext}
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2
-        p-3 rounded-full
-        bg-white/30 backdrop-blur-sm
-        transition duration-200 ease-out
-        hover:bg-red-600
-        hover:text-white transition duration-200
-        text-gray-700"
+        className="p-3 rounded-full
+          bg-white/30 backdrop-blur-sm
+          transition duration-200 ease-out
+          hover:bg-red-600
+          hover:text-white transition duration-200
+          text-gray-700"
       >
         &#8594;
       </button>
+    </div>
 
       <img
         src={galleryImages[selectedIndex]}
