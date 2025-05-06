@@ -589,6 +589,7 @@ const goPrev = () => {
                   <img
                     src={`/coi/${index + 1}.jpg`}
                     alt={`Event photo ${index + 1}`}
+                    loading="lazy"
                      className="w-full h-64 object-cover rounded-xl"
                   />
                 </div>
@@ -616,7 +617,7 @@ const goPrev = () => {
               >
                 {Array.from({ length: 20 }).map((_, idx) => {
                   // Choose 5 random indexes to span two rows
-                  const bigIndexes = [2, 5, 9, 14, 18];
+                  const bigIndexes = [2, 5, 9, 14];
                   const isBig = bigIndexes.includes(idx);
 
                   return (
@@ -627,6 +628,7 @@ const goPrev = () => {
                       <img
                         src={`/coi/gallery/${idx + 1}.jpg`}
                         alt={`Gallery ${idx + 1}`}
+                        loading="lazy"
                         className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
                         onClick={() => setSelectedIndex(idx)}
                         onError={(e) => {
