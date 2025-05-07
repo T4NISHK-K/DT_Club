@@ -30,8 +30,7 @@ export function HackathonLandingPage() {
   const [showMasonry, setShowMasonry] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
-const galleryImages = Array.from({ length: 20 }).map((_, i) => `/coi/gallery/${i + 1}.jpg`);
-
+  const galleryImages = Array.from({ length: 20 }).map((_, i) => `/coi/gallery/${i + 1}.jpg`);
 
 const goNext = () => {
   setSelectedIndex((prev) => (prev + 1) % galleryImages.length);
@@ -41,6 +40,41 @@ const goPrev = () => {
   setSelectedIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
 };
 
+//fade in fade out per section
+
+const useInView = (options = {}) => {
+  const ref = useRef();
+  const [isVisible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      options
+    );
+    if (ref.current) observer.observe(ref.current);
+
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
+  }, [ref, options]);
+
+  return [ref, isVisible];
+};
+
+const LazySection = ({ children, threshold = 0.15 }) => {
+  const [ref, isVisible] = useInView({ threshold });
+
+  return (
+    <section
+      ref={ref}
+      className={`transition-opacity duration-600 ease-in-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      {children}
+    </section>
+  );
+};
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -65,6 +99,7 @@ const goPrev = () => {
     }
   };
 
+  
    // Observer for gallery
    useEffect(() => {
     const observer = new IntersectionObserver(
@@ -287,6 +322,7 @@ const goPrev = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
+        <LazySection>
         <section id="home" className="relative overflow-hidden bg-gradient-to-r from-red-700 to-red-500 py-20 text-white">
           <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-10"></div>
           <div className="container relative z-10 mx-auto px-4 py-12 text-center md:py-24">
@@ -301,13 +337,21 @@ const goPrev = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up animation-delay-400">
               <Link 
-                to="#winners" 
+                to="#"
+                onClick={(e) => {
+                  e.preventDefault(); // prevent navigation
+                  document.getElementById("winners")?.scrollIntoView({ behavior: "smooth" });
+                }} 
                 className="inline-flex items-center justify-center rounded-md bg-white px-8 py-3 text-base font-medium text-red-600 hover:bg-gray-100 focus:outline-none"
               >
                 View Winners
               </Link>
               <Link 
-                to="#gallery" 
+                to="#"
+                onClick={(e) => {
+                  e.preventDefault(); // prevent navigation
+                  document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="inline-flex items-center justify-center rounded-md border border-white bg-transparent px-8 py-3 text-base font-medium text-white hover:bg-white/10 focus:outline-none"
               >
                 <Play className="mr-2 h-4 w-4" />
@@ -316,8 +360,10 @@ const goPrev = () => {
             </div>
           </div>
         </section>
+        </LazySection>
 
         {/* About Section */}
+        <LazySection>
         <section id="about" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">About The Event</h2>
@@ -361,8 +407,10 @@ const goPrev = () => {
             </div>
           </div>
         </section>
+        </LazySection>
 
         {/* Event Highlights Section */}
+        <LazySection>
         <section id="highlights" className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Event Highlights</h2>
@@ -445,8 +493,10 @@ const goPrev = () => {
             </div>
           </div>
         </section>
+        </LazySection>
 
         {/* Winners Section */}
+        <LazySection>
         <section id="winners" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Winning Projects</h2>
@@ -513,6 +563,7 @@ const goPrev = () => {
             </div>
           </div>
         </section>
+        </LazySection>
 
         {/* Gallery Section */}
         <section id="gallery" className="bg-gray-50 py-16 md:py-24">
@@ -589,7 +640,7 @@ const goPrev = () => {
                   <img
                     src={`/coi/${index + 1}.jpg`}
                     alt={`Event photo ${index + 1}`}
-                    loading="lazy"
+                     loading="lazy"
                      className="w-full h-64 object-cover rounded-xl"
                   />
                 </div>
@@ -616,34 +667,36 @@ const goPrev = () => {
                 style={{ gridAutoRows: "150px", gridAutoFlow: "dense" }}
               >
                 {Array.from({ length: 20 }).map((_, idx) => {
-                  // Choose 5 random indexes to span two rows
-                  const bigIndexes = [2, 5, 9, 14];
-                  const isBig = bigIndexes.includes(idx);
+            const delay = idx * 100;
+            const bigIndexes = [2, 5, 9, 14];
+            const isBig = bigIndexes.includes(idx);
 
-                  return (
-                    <div
-                      key={idx}
-                      className={`${isBig ? "row-span-2" : "row-span-1"} overflow-hidden`}
-                    >
-                      <img
-                        src={`/coi/gallery/${idx + 1}.jpg`}
-                        alt={`Gallery ${idx + 1}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
-                        onClick={() => setSelectedIndex(idx)}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/coi/gallery/${idx + 1}.JPG`;
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+            return (
+              <div
+                key={idx}
+                className={`${isBig ? "row-span-2" : "row-span-1"} overflow-hidden`}
+              >
+                <img
+                  src={`/coi/gallery/${idx + 1}.jpg`}
+                  alt={`Gallery ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-full object-cover rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer fade-in rounded-x1"
+                  style={{ animationDelay: `${delay}ms`, animationFillMode: 'forwards' }}
+                  onClick={() => setSelectedIndex(idx)}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/coi/gallery/${idx + 1}.JPG`;
+                  }}
+                />
+              </div>
+            );
+          })}
+
               </div>
             )}
            {selectedIndex !== null && (
   <div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4"
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-4 "
     onClick={() => setSelectedIndex(null)}
   >
     <div
@@ -708,6 +761,7 @@ const goPrev = () => {
         </section>
 
         {/* FAQ Section */}
+        <LazySection>
         <section id="faq" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">
@@ -789,8 +843,9 @@ const goPrev = () => {
             </div>
           </div>
         </section>
-
+        </LazySection>
         {/* Event Recap Section */}
+        <LazySection>
         <section id="recap" className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Event Recap</h2>
@@ -862,7 +917,11 @@ const goPrev = () => {
                   Download Event Report
                 </Link>
                 <Link 
-                  to="#" 
+                  to="#"
+                  onClick={(e) => {
+                    e.preventDefault(); // prevent navigation
+                    document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" });
+                  }} 
                   className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none"
                 >
                   View Photo Gallery
@@ -871,7 +930,9 @@ const goPrev = () => {
             </div>
           </div>
         </section>
+        </LazySection>
       {/* Next Event Teaser */}
+      <LazySection>
         <section className="bg-gradient-to-r from-red-700 to-red-500 py-16 text-white md:py-24">
           <div className="container mx-auto px-4 text-center">
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">Calculas of Innovation 4.0</h2>
@@ -888,6 +949,7 @@ const goPrev = () => {
             </Link>
           </div>
         </section>
+        </LazySection>
       </main>
 
       {/* Footer */}
