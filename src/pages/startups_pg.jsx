@@ -1,12 +1,12 @@
 import React from 'react'
-import { ExampleNavbarThree } from '../components/navbar'
+import { TubelightNavbar } from '../components/tubelight-navbar.jsx'
 import { FooterThree } from '../components/footer'
 import { Blogstartupone } from '../components/blogs_startups'
 
 export function Start_ups() {
   return (
     <div>
-      <ExampleNavbarThree/>
+      <TubelightNavbar/>
       <Blogstartupone />
       <FooterThree/>
 

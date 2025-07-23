@@ -1,12 +1,12 @@
 import React from 'react'
 import { ContactPageOne } from '../components/contact'
-import { ExampleNavbarThree } from '../components/navbar'
+import { TubelightNavbar } from '../components/tubelight-navbar.jsx'
 import { FooterThree } from '../components/footer'
 
 export function Contact_us() {
   return (
     <div>
-        <ExampleNavbarThree/>
+        <TubelightNavbar/>
         <ContactPageOne/>
         <FooterThree/>
     </div>

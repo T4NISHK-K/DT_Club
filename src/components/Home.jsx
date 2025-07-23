@@ -1,5 +1,5 @@
 import React from "react";
-import { ExampleNavbarThree } from "../components/navbar";
+import { TubelightNavbar } from "../components/tubelight-navbar.jsx";
 import { HeroOne } from "../components/hero";
 import { SignInOne } from "../components/signin";
 import { FeatureTwo } from "../components/design_cores";
@@ -16,7 +16,7 @@ import { teamMembers } from "../components/about"; // Import teamMembers from ab
 function Home() {
   return (
     <div className="bg-[#F9FAFB]">
-      <ExampleNavbarThree />
+      <TubelightNavbar />
       <HeroOne />
       <FeatureTwo />
       <SignInOne />

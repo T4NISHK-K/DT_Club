@@ -1,7 +1,7 @@
 
 
 import React from 'react'
-import { ExampleNavbarThree } from '../components/navbar'
+import { TubelightNavbar } from '../components/tubelight-navbar.jsx'
 import { AboutPageOne } from '../components/about'
 import { FooterThree } from '../components/footer'
 
@@ -11,7 +11,7 @@ export function Aboutus() {
 
   return (
    <div>
-    <ExampleNavbarThree/>
+    <TubelightNavbar/>
     <AboutPageOne/>
     <FooterThree/>
    </div>

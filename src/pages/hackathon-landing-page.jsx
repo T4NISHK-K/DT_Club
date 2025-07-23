@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { TubelightNavbar } from "../components/tubelight-navbar.jsx";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -185,87 +186,13 @@ const LazySection = ({ children, threshold = 0.15 }) => {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-white">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img
-              src="/src/assets/l1_t.png"
-              alt="Calculas of Innovation Logo"
-              width={40}
-              height={40}
-              className="rounded" /*w-[40px] h-[40px] */
-            />
-            <span className="text-lg font-bold text-red-600">Calculus of Innovation</span>
-          </div>
-
-          {isMobile ? (
-            <div className="flex items-center">
-              <button 
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium p-2 hover:bg-gray-100"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </button>
-
-              {mobileMenuOpen && (
-                <div className="fixed inset-0 top-16 z-50 bg-white p-4 shadow-md">
-                  <nav className="flex h-[calc(100vh-4rem)] flex-col space-y-4 overflow-y-auto">
-                    <a 
-                      href="#home" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Home
-                    </a>
-                    <a 
-                      href="#about" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      About
-                    </a>
-                    <a 
-                      href="#highlights" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Highlights
-                    </a>
-                    <a 
-                      href="#winners" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Winners
-                    </a>
-                    <a 
-                      href="#gallery" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Gallery
-                    </a>
-                    <a 
-                      href="#faq" 
-                      className="text-gray-600 hover:text-red-600"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      FAQ
-                    </a>
-                    <a 
-                      href="#recap" 
-                      className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Event Recap
-                    </a>
-                  </nav>
-                </div>
-              )}
-            </div>
-          ) : (
-            <nav className="flex items-center space-x-6">
+      <header>
+        <TubelightNavbar />
+        
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 top-16 z-50 bg-white p-4 shadow-md">
+            <nav className="flex h-[calc(100vh-4rem)] flex-col space-y-4 overflow-y-auto">
               <a 
                 href="#home" 
                 className="text-gray-600 hover:text-red-600"
@@ -316,14 +243,68 @@ const LazySection = ({ children, threshold = 0.15 }) => {
                 Event Recap
               </a>
             </nav>
-          )}
+          </div>
+        )}
+        
+        {/* Desktop Menu */}
+        <div className="hidden md:block">
+          <nav className="flex items-center space-x-6">
+            <a 
+              href="#home" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </a>
+            <a 
+              href="#about" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </a>
+            <a 
+              href="#highlights" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Highlights
+            </a>
+            <a 
+              href="#winners" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Winners
+            </a>
+            <a 
+              href="#gallery" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Gallery
+            </a>
+            <a 
+              href="#faq" 
+              className="text-gray-600 hover:text-red-600"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              FAQ
+            </a>
+            <a 
+              href="#recap" 
+              className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Event Recap
+            </a>
+          </nav>
         </div>
       </header>
-
       <main className="flex-1">
         {/* Hero Section */}
         <LazySection>
-        <section id="home" className="relative overflow-hidden bg-gradient-to-r from-red-700 to-red-500 py-20 text-white">
+          <div id="home" className="relative overflow-hidden bg-gradient-to-r from-red-700 to-red-500 py-20 text-white">
           <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-10"></div>
           <div className="container relative z-10 mx-auto px-4 py-12 text-center md:py-24">
             <div className="inline-block rounded-full bg-white/20 px-4 py-1 text-sm font-medium mb-4">
@@ -359,12 +340,12 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               </Link>
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
 
         {/* About Section */}
         <LazySection>
-        <section id="about" className="py-16 md:py-24">
+          <div id="about" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">About The Event</h2>
             <div className="grid gap-8 md:grid-cols-2 md:gap-12">
@@ -406,12 +387,12 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
 
         {/* Event Highlights Section */}
         <LazySection>
-        <section id="highlights" className="bg-gray-50 py-16 md:py-24">
+          <div id="highlights" className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Event Highlights</h2>
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -492,12 +473,12 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               />
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
 
         {/* Winners Section */}
         <LazySection>
-        <section id="winners" className="py-16 md:py-24">
+          <div id="winners" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Winning Projects</h2>
             <div className="grid gap-8 md:grid-cols-3">
@@ -562,11 +543,12 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               </Link>
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
 
         {/* Gallery Section */}
-        <section id="gallery" className="bg-gray-50 py-16 md:py-24">
+        <LazySection>
+          <div id="gallery" className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">
               Event Gallery
@@ -758,11 +740,12 @@ const LazySection = ({ children, threshold = 0.15 }) => {
 )}
 
           </div>
-        </section>
+        </div>
+        </LazySection>
 
         {/* FAQ Section */}
         <LazySection>
-        <section id="faq" className="py-16 md:py-24">
+          <div id="faq" className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">
               Frequently Asked Questions
@@ -842,11 +825,11 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
         {/* Event Recap Section */}
         <LazySection>
-        <section id="recap" className="bg-gray-50 py-16 md:py-24">
+          <div id="recap" className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 md:text-4xl">Event Recap</h2>
 
@@ -929,11 +912,11 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
         </LazySection>
       {/* Next Event Teaser */}
       <LazySection>
-        <section className="bg-gradient-to-r from-red-700 to-red-500 py-16 text-white md:py-24">
+        <div className="bg-gradient-to-r from-red-700 to-red-500 py-16 text-white md:py-24">
           <div className="container mx-auto px-4 text-center">
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">Calculas of Innovation 4.0</h2>
             <p className="mx-auto mb-8 max-w-2xl text-xl">
@@ -948,7 +931,7 @@ const LazySection = ({ children, threshold = 0.15 }) => {
               Get Notified
             </Link>
           </div>
-        </section>
+        </div>
         </LazySection>
       </main>
 

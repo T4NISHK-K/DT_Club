@@ -10,7 +10,7 @@ export function FooterThree() {
           <div className="w-auto p-8">
             <a href="#">
               <div className="inline-flex items-center">
-                <img src={l1_t} alt="" srcset="" className='h-[40px] w-[46px]' />
+                <img src={l1_t} alt="" srcSet="" className='h-[40px] w-[46px]' />
                 <span className="ml-4 text-lg font-bold"><span className='text-red-600'>Design</span> Thinking Club</span>
               </div>
             </a>

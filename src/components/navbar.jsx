@@ -100,7 +100,7 @@ export function ExampleNavbarThree() {
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center space-x-2">
                     <span>
-                      <img src={l1} alt="" srcset="" className='h-[30px] w-[36px]' />
+                      <img src={l1} alt="" srcSet="" className='h-[30px] w-[36px]' />
                     </span>
                     <span className="font-bold"><span className='text-red-600'>Design</span>  Thinking Club</span>
                   </div>
