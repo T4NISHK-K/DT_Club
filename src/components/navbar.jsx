@@ -3,8 +3,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
-import l1_t from "../assets/l1_t.png"
-import l1 from "../assets/l1.svg"
+import dtLogo from "../assets/l1.jpg"
 
 const menuItems = [
   {
@@ -46,14 +45,12 @@ export function ExampleNavbarThree() {
 
   return (
     <div className="relative w-full bg-[#F9FAFB]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-        <div className="inline-flex items-center space-x-2">
-          <span>
-            <img src={l1_t} alt="" className='w-[40px] h-[40px]' />
-          </span>
-          <span className="font-bold"><span className='text-red-600'>Design</span> Thinking Club</span>
+      <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-2 sm:px-6 lg:px-8 relative">
+        {/* Logo in top left corner aligned with navbar */}
+        <div className="absolute top-0 left-4 sm:left-6 lg:left-8 z-50 flex items-center h-full">
+          <img src={dtLogo} alt="Design Thinking Club Logo" className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm p-2 border border-gray-200 shadow-lg" />
         </div>
-        <div className="hidden grow items-start lg:flex">
+        <div className="grow items-center justify-center lg:flex">
           <ul className="ml-12 inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
@@ -98,11 +95,8 @@ export function ExampleNavbarThree() {
             <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
-                  <div className="inline-flex items-center space-x-2">
-                    <span>
-                      <img src={l1} alt="" srcSet="" className='h-[30px] w-[36px]' />
-                    </span>
-                    <span className="font-bold"><span className='text-red-600'>Design</span>  Thinking Club</span>
+                  <div className="inline-flex items-center">
+                    <img src={dtLogo} alt="Design Thinking Club Logo" className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm p-2 border border-gray-200 shadow-lg" />
                   </div>
                   <div className="-mr-2">
                     <button

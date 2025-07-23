@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Lightbulb, Users, BookOpen, Calendar, GraduationCap, Mail } from "lucide-react";
 import { cn } from "../lib/utils";
-import l1_t from "../assets/l1_t.png";
+import dtLogo from "../assets/l1.jpg";
 
 const navItems = [
   { name: "Home", url: "/", icon: Home },
@@ -49,13 +49,10 @@ export function TubelightNavbar() {
 
   return (
     <div className="w-full bg-white shadow-sm">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <img src={l1_t} alt="DT Club Logo" className="w-[40px] h-[40px]" />
-          <span className="font-bold">
-            <span className="text-red-600">Design</span> Thinking Club
-          </span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-center py-2 relative">
+        {/* Logo in top left corner aligned with navbar */}
+        <div className="absolute top-0 left-4 sm:left-6 lg:left-8 z-50 flex items-center h-full">
+          <img src={dtLogo} alt="Design Thinking Club Logo" className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm p-2 border border-gray-200 shadow-lg" />
         </div>
 
         {/* Navigation */}
