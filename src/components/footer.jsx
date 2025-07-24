@@ -8,55 +8,45 @@ export function FooterThree() {
       <div className="container relative z-10 mx-auto px-4">
         <div className="-m-8 flex flex-wrap items-center justify-between">
           <div className="w-auto p-8">
-            <a href="#">
+            <Link to="/">
               <div className="inline-flex items-center">
                 <img src={l1_t} alt="" srcSet="" className='h-[40px] w-[46px]' />
                 <span className="ml-4 text-lg font-bold"><span className='text-red-600'>Design</span> Thinking Club</span>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="w-auto p-8">
             <ul className="-m-5 flex flex-wrap items-center">
               <li className="p-5">
                 <Link
-                  to="/privacy">
-                  <a className="font-medium text-gray-600 hover:text-gray-700" href="#">
+                  to="/privacy" className="font-medium text-gray-600 hover:text-gray-700">
                     Privacy Policy
-                  </a>
                 </Link>
               </li>
               <li className="p-5">
                 <Link
-                  to="/privacy">
-                  <a className="font-medium text-gray-600 hover:text-gray-700" href="#">
+                  to="/privacy" className="font-medium text-gray-600 hover:text-gray-700">
                     Terms of Service
-                  </a>
                 </Link>
               </li>
               <li className="p-5">
                 <Link
-                  to="/privacy">
-                  <a className="font-medium text-gray-600 hover:text-gray-700" href="#">
+                  to="/privacy" className="font-medium text-gray-600 hover:text-gray-700">
                     Return Policy
-                  </a>
                 </Link>
               </li>
               <li className="p-5">
                 <Link
-                  to="/contact">
-                  <a className="font-medium text-gray-600 hover:text-gray-700" href="#">
+                  to="/contact" className="font-medium text-gray-600 hover:text-gray-700">
                     Contact Us
-                  </a>
                 </Link>
               </li>
             </ul>
           </div>
-          <Link
-          to="/contact">
-            <div className="w-auto p-8">
+          <div className="w-auto p-8">
               <div className="-m-1.5 flex flex-wrap">
                 <div className="w-auto p-1.5">
-                  <a href="#">
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                       <svg
                         width="8"
@@ -74,7 +64,7 @@ export function FooterThree() {
                   </a>
                 </div>
                 <div className="w-auto p-1.5">
-                  <a href="#">
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                       <svg
                         width="14"
@@ -92,7 +82,7 @@ export function FooterThree() {
                   </a>
                 </div>
                 <div className="w-auto p-1.5">
-                  <a href="#">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-300 hover:border-gray-400">
                       <svg
                         width="16"
@@ -111,7 +101,6 @@ export function FooterThree() {
                 </div>
               </div>
             </div>
-          </Link>
         </div>
         <h1 className='w-full text-center bg-slate-200'>
           Developed and Designed by

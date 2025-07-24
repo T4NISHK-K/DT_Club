@@ -54,10 +54,8 @@ export function FaqFour() {
         <p className="mt-10 text-center text-gray-600">
           Can&apos;t find what you&apos;re looking for?{' '}
           <Link
-          to={"/contact"}>
-            <a href="#" title="" className="text-red-600 font-semibold hover:underline">
+          to={"/contact"} className="text-red-600 font-semibold hover:underline">
               Contact us
-            </a>
           </Link>
         </p>
       </div>

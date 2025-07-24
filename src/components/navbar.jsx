@@ -44,7 +44,7 @@ export function ExampleNavbarThree() {
   }
 
   return (
-    <div className="relative w-full bg-[#F9FAFB]">
+    <div className="relative w-full bg-transparent">
       <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-2 sm:px-6 lg:px-8 relative">
         {/* Logo in top left corner aligned with navbar */}
         <div className="absolute top-0 left-4 sm:left-6 lg:left-8 z-50 flex items-center h-full">
